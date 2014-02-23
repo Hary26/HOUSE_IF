@@ -189,9 +189,14 @@ end;
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   if paramstr(1)='' then
-    Gserver:='http://hinterface.no-ip.org/cgi/json'
+   begin
+//     Gserver:='http://hinterface.no-ip.org/cgi/json'
+     Gserver:='http://10.0.0.123/cgi/json'
+   end
   else
-    Gserver:=(paramstr(1));
+    begin
+      Gserver:=(paramstr(1));
+    end;
 
   GCurrent:=TSolarData.Create;
   FUpdater:=TUpdateThread.Create(false);
@@ -219,7 +224,7 @@ begin
        lUpdateTS.Caption:=GCurrent.DateString+' | '+GCurrent.TimeString+' ['+inttostr(GCurrent.UPDTime)+']';
        lKOLLVL.Caption  := inttostr(GCurrent.KOLLEKTOR_VL)+' °C';
        lKOLLRL.Caption  := inttostr(GCurrent.KOLLEKTOR_RL)+' °C';
-       lKOLLMWL.Caption := FormatFloat('##.##',GCurrent.KOLLEKTOR_MWL);
+       lKOLLMWL.Caption := floattostr(GCurrent.KOLLEKTOR_MWL)+' kW';
        lKHolz.Caption   := inttostr(GCurrent.KESSEL_HOLZ)+' °C';
        lKOEL.Caption    := inttostr(GCurrent.KESSEL_OEL)+' °C';
        lPUTo.Caption    := inttostr(GCurrent.PUFFER_Toben)+' °C';

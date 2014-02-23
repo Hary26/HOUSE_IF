@@ -10,7 +10,7 @@ object Form1: TForm1
   ClientWidth = 800
   OnCreate = FormCreate
   OnPaint = FormPaint
-  LCLVersion = '1.2.0.2'
+  LCLVersion = '1.0.14.0'
   object Image1: TImage
     Left = 0
     Height = 424
@@ -669,36 +669,37 @@ object Form1: TForm1
   end
   object lUpdateTS: TLabel
     Left = 8
-    Height = 15
+    Height = 14
     Top = 432
-    Width = 20
+    Width = 17
     Caption = '----'
     ParentColor = False
   end
   object lKOLLRL: TLabel
     Left = 176
-    Height = 15
+    Height = 14
     Top = 63
-    Width = 25
+    Width = 21
     Alignment = taRightJustify
     Caption = '-----'
     ParentColor = False
   end
   object lKOLLVL: TLabel
     Left = 80
-    Height = 15
+    Height = 14
     Top = 32
-    Width = 25
+    Width = 21
     Alignment = taRightJustify
     Caption = '-----'
     ParentColor = False
   end
   object lKOLLMWL: TLabel
-    Left = 176
-    Height = 15
+    Left = 152
+    Height = 14
     Top = 32
-    Width = 28
-    Alignment = taRightJustify
+    Width = 72
+    Alignment = taCenter
+    AutoSize = False
     Caption = 'MWL'
     ParentColor = False
   end
@@ -779,13 +780,13 @@ object Form1: TForm1
     ParentFont = False
   end
   object lZVentil: TLabel
-    Left = 592
+    Left = 344
     Height = 16
-    Top = 400
+    Top = 304
     Width = 64
     Alignment = taCenter
     AutoSize = False
-    Caption = '--'
+    Caption = 'Boiler'
     Font.Color = clRed
     Font.Height = -13
     ParentColor = False
