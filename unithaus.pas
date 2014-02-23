@@ -54,7 +54,15 @@ type
   end;
 
   TForm1 = class(TForm)
-    Image1: TImage;
+    OEL_AUS: TImage;
+    Pumpe_S_AUS: TImage;
+    Pumpe_W_AUS: TImage;
+    ZV_Rechts: TImage;
+    ZV_Links: TImage;
+    Pumpe_S_EIN: TImage;
+    Schema: TImage;
+    OEL_EIN: TImage;
+    Pumpe_W_EIN: TImage;
     lPSOL: TLabel;
     lKOLLRL: TLabel;
     lPLADE: TLabel;
@@ -118,7 +126,6 @@ var s      : string;
     json   : TJSONData;
     jo,jso : TJSONObject;
     jp     : TJSONParser;
-    i      : Integer;
     st     : TDateTime;
 
 begin
@@ -205,8 +212,9 @@ end;
 
 procedure TForm1.FormPaint(Sender: TObject);
 begin
-  Canvas.Draw(0,0,Image1.Picture.Bitmap);
+  Canvas.Draw(0,0,Schema.Picture.Bitmap);
 end;
+
 
 procedure TForm1.lWWTu1Click(Sender: TObject);
 begin
@@ -230,9 +238,36 @@ begin
        lPUTo.Caption    := inttostr(GCurrent.PUFFER_Toben)+' °C';
        lPUTu.Caption    := inttostr(GCurrent.PUFFER_TUnten)+' °C';
        lWWTu.Caption    := inttostr(GCurrent.WARMWASSER_TUnten)+' °C';
-       lPLADE.Caption   := BoolToStr(GCurrent.PUMPE_LADE,'EIN','AUS');
-       lPSOL.Caption    := BoolToStr(GCurrent.PUMPE_SOLAR,'EIN','AUS');
+     // lPLADE.Caption   := BoolToStr(GCurrent.PUMPE_LADE,'EIN','AUS');
+     //  lPSOL.Caption    := BoolToStr(GCurrent.PUMPE_SOLAR,'EIN','AUS');
        lZVentil.Caption := GCurrent.ZONENVENTIL;
+
+        if GCurrent.PUMPE_LADE = TRUE then
+        begin
+             Canvas.Draw(142,329,Pumpe_W_EIN.Picture.Bitmap);
+        end
+        else
+        begin
+             Canvas.Draw(142,329,Pumpe_W_AUS.Picture.Bitmap);
+        end;
+
+        if GCurrent.PUMPE_SOLAR = TRUE then
+        begin
+             Canvas.Draw(391,249,Pumpe_S_EIN.Picture.Bitmap);
+        end
+        else
+        begin
+             Canvas.Draw(391,249,Pumpe_S_AUS.Picture.Bitmap);
+        end;
+
+        if GCurrent.ZONENVENTIL = 'BOILER' then
+        begin
+            Canvas.Draw(391,320,ZV_Links.Picture.Bitmap);
+        end
+        else
+        begin
+           Canvas.Draw(391,320,ZV_Rechts.Picture.Bitmap);
+        end;
      end
     else
       if GCurrent.UPDTime=-2 then
