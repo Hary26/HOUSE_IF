@@ -38,7 +38,7 @@ type
   end;
 
   var
-  { TForm1 }
+  { THeizung }
   GCurrent : TSolarData;
   Gserver  : string;
 
@@ -53,7 +53,7 @@ type
     procedure Execute;override;
   end;
 
-  TForm1 = class(TForm)
+  THeizung = class(TForm)
     OEL_AUS: TImage;
     Pumpe_S_AUS: TImage;
     Pumpe_W_AUS: TImage;
@@ -90,7 +90,7 @@ type
   end;
 
 var
-  Form1: TForm1;
+  Heizung: THeizung;
 
 implementation
 
@@ -190,15 +190,15 @@ begin
   FLock.Release;
 end;
 
-{ TForm1 }
+{ THeizung }
 
 
-procedure TForm1.FormCreate(Sender: TObject);
+procedure THeizung.FormCreate(Sender: TObject);
 begin
   if paramstr(1)='' then
    begin
-//     Gserver:='http://hinterface.no-ip.org/cgi/json'
-     Gserver:='http://10.0.0.123/cgi/json'
+     Gserver:='http://hinterface.no-ip.org/cgi/json'
+//     Gserver:='http://10.0.0.123/cgi/json'
    end
   else
     begin
@@ -210,18 +210,18 @@ begin
   Timer.Enabled:=true;
 end;
 
-procedure TForm1.FormPaint(Sender: TObject);
+procedure THeizung.FormPaint(Sender: TObject);
 begin
   Canvas.Draw(0,0,Schema.Picture.Bitmap);
 end;
 
 
-procedure TForm1.lWWTu1Click(Sender: TObject);
+procedure THeizung.lWWTu1Click(Sender: TObject);
 begin
 
 end;
 
-procedure TForm1.TimerTimer(Sender: TObject);
+procedure THeizung.TimerTimer(Sender: TObject);
 begin
   if not assigned(GCurrent) then
    exit;

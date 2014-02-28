@@ -1,7 +1,7 @@
-object Form1: TForm1
-  Left = 389
+object Heizung: THeizung
+  Left = 242
   Height = 454
-  Top = 138
+  Top = 114
   Width = 777
   BorderIcons = []
   BorderStyle = bsNone
@@ -896,6 +896,7 @@ object Form1: TForm1
       AF890709B88DC74DD9B7A312C77F86C82FD6C4FE227D0000000049454E44AE42
       6082
     }
+    Visible = False
   end
   object Pumpe_S_AUS: TImage
     Left = 94
@@ -923,6 +924,7 @@ object Form1: TForm1
       C30DDD98DBA7D7CBEB9B5AADC69B14DE5B076BBF006AEC30288604EA38000000
       0049454E44AE426082
     }
+    Visible = False
   end
   object OEL_AUS: TImage
     Left = 128
@@ -947,6 +949,7 @@ object Form1: TForm1
       649CB22C336791FE1DA7BAE3B4B4D33D8F4E2C53DE3847EB3B3E4CC8625961D9
       0D0000000049454E44AE426082
     }
+    Visible = False
   end
   object Timer: TTimer
     Enabled = False

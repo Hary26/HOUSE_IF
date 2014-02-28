@@ -44,7 +44,7 @@
       <Unit1>
         <Filename Value="unithaus.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="Form1"/>
+        <ComponentName Value="Heizung"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="unithaus"/>
