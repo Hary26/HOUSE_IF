@@ -3,7 +3,7 @@ object Heizung: THeizung
   Height = 451
   Top = 225
   Width = 777
-  BorderIcons = [biMinimize]
+  BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Form'
   ClientHeight = 451
@@ -13,6 +13,7 @@ object Heizung: THeizung
   OnPaint = FormPaint
   Position = poScreenCenter
   LCLVersion = '1.0.14.0'
+  WindowState = wsFullScreen
   object Schema: TImage
     Left = 0
     Height = 424
@@ -621,83 +622,93 @@ object Heizung: THeizung
   end
   object lKOLLRL: TLabel
     Left = 176
-    Height = 14
+    Height = 17
     Top = 63
-    Width = 21
+    Width = 26
     Alignment = taRightJustify
     Caption = '-----'
+    Font.Height = -13
     ParentColor = False
+    ParentFont = False
   end
   object lKOLLVL: TLabel
     Left = 80
-    Height = 14
+    Height = 17
     Top = 32
-    Width = 21
+    Width = 26
     Alignment = taRightJustify
     Caption = '-----'
+    Font.Height = -13
     ParentColor = False
+    ParentFont = False
   end
   object lKOLLMWL: TLabel
-    Left = 160
-    Height = 14
+    Left = 200
+    Height = 17
     Top = 32
-    Width = 72
-    Alignment = taCenter
-    AutoSize = False
+    Width = 29
+    Alignment = taRightJustify
     Caption = 'MWL'
+    Font.Height = -13
     ParentColor = False
+    ParentFont = False
   end
   object lWWTu: TLabel
-    Left = 456
-    Height = 15
+    Left = 472
+    Height = 17
     Top = 336
-    Width = 72
+    Width = 36
     Alignment = taCenter
-    AutoSize = False
     Caption = 'WWtu'
+    Font.Height = -13
     ParentColor = False
+    ParentFont = False
   end
   object lPUTu: TLabel
-    Left = 232
-    Height = 15
+    Left = 256
+    Height = 17
     Top = 336
-    Width = 72
+    Width = 31
     Alignment = taCenter
-    AutoSize = False
     Caption = 'PUTu'
+    Font.Height = -13
     ParentColor = False
+    ParentFont = False
   end
   object lPUTo: TLabel
-    Left = 232
-    Height = 15
-    Top = 200
-    Width = 72
+    Left = 256
+    Height = 17
+    Top = 192
+    Width = 31
     Alignment = taCenter
-    AutoSize = False
     Caption = 'PUTo'
+    Font.Height = -13
     ParentColor = False
+    ParentFont = False
     OnClick = lPUToClick
   end
   object lKOEL: TLabel
-    Left = 688
-    Height = 15
-    Top = 272
-    Width = 72
+    Left = 712
+    Height = 17
+    Top = 273
+    Width = 20
     Alignment = taCenter
-    AutoSize = False
     Caption = 'Oel'
+    Font.Height = -13
     ParentColor = False
+    ParentFont = False
     OnClick = lKOELClick
   end
   object lKHolz: TLabel
-    Left = 40
-    Height = 15
-    Top = 272
-    Width = 72
+    Left = 64
+    Height = 17
+    Top = 273
+    Width = 25
     Alignment = taCenter
-    AutoSize = False
     Caption = 'Holz'
+    Font.Height = -13
     ParentColor = False
+    ParentFont = False
   end
   object lPSOL: TLabel
     Left = 368
@@ -956,34 +967,37 @@ object Heizung: THeizung
     Visible = False
   end
   object lWWTo: TLabel
-    Left = 456
-    Height = 15
+    Left = 472
+    Height = 17
     Top = 184
-    Width = 72
+    Width = 36
     Alignment = taCenter
-    AutoSize = False
     Caption = 'WWto'
+    Font.Height = -13
     ParentColor = False
+    ParentFont = False
   end
   object lVL_HAUS: TLabel
-    Left = 568
-    Height = 15
-    Top = 96
-    Width = 72
-    Alignment = taCenter
-    AutoSize = False
+    Left = 571
+    Height = 17
+    Top = 103
+    Width = 59
+    Alignment = taRightJustify
     Caption = 'VLH:UNKN'
+    Font.Height = -13
+    ParentBidiMode = False
     ParentColor = False
+    ParentFont = False
   end
   object lVL_W_IST: TLabel
-    Left = 680
-    Height = 15
-    Top = 96
-    Width = 72
-    Alignment = taCenter
-    AutoSize = False
+    Left = 688
+    Height = 17
+    Top = 103
+    Width = 67
     Caption = 'VLWI:UNKN'
+    Font.Height = -13
     ParentColor = False
+    ParentFont = False
   end
   object bClose: TButton
     Left = 702

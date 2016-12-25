@@ -13,7 +13,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="26" Y="14"/>
-        <UsageCount Value="38"/>
+        <UsageCount Value="39"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -26,9 +26,9 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="258"/>
-        <CursorPos X="10" Y="273"/>
-        <UsageCount Value="38"/>
+        <TopLine Value="226"/>
+        <CursorPos X="19" Y="232"/>
+        <UsageCount Value="39"/>
         <Bookmarks Count="1">
           <Item0 X="43" Y="181" ID="1"/>
         </Bookmarks>
