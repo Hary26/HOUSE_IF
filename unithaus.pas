@@ -22,12 +22,20 @@ type
     KOLLEKTOR_RL : integer;
     KOLLEKTOR_MWL : double;
     WARMWASSER_TUnten : integer;
+    WARMWASSER_TOben  : integer;
     PUFFER_Toben      : integer;
     PUFFER_TUnten     : integer;
+    VORLAUF_Haus      : double;
+    VORLAUF_WKS_SOLL  : double;
+    VORLAUF_WKS_IST   : double;
     KESSEL_OEL        : integer;
     KESSEL_HOLZ       : integer;
     PUMPE_SOLAR       : boolean;
     PUMPE_LADE        : boolean;
+    PUMPE_WW          : boolean;
+    PUMPE_HK1         : boolean;
+    PUMPE_HK2         : boolean;
+    BRENNER           : boolean;
     ZONENVENTIL       : String;
     UPDTime           : Integer;
     constructor Create;
@@ -54,7 +62,11 @@ type
   end;
 
   THeizung = class(TForm)
+    bClose: TButton;
+    lVL_HAUS: TLabel;
+    lVL_W_IST: TLabel;
     OEL_AUS: TImage;
+    STORUNG: TImage;
     Pumpe_S_AUS: TImage;
     Pumpe_W_AUS: TImage;
     ZV_Rechts: TImage;
@@ -68,6 +80,7 @@ type
     lPLADE: TLabel;
     lZVentil: TLabel;
     lWWTu: TLabel;
+    lWWTo: TLabel;
     lKOLLVL: TLabel;
     lKOLLMWL: TLabel;
     lUpdateTS: TLabel;
@@ -76,8 +89,11 @@ type
     lKOEL: TLabel;
     lKHolz: TLabel;
     Timer: TTimer;
+    procedure bCloseClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormPaint(Sender: TObject);
+    procedure lKOELClick(Sender: TObject);
+    procedure lPUToClick(Sender: TObject);
     procedure lWWTu1Click(Sender: TObject);
     procedure TimerTimer(Sender: TObject);
   private
@@ -121,7 +137,7 @@ begin
   inherited Destroy;
 end;
 
-procedure TSolarData.UpdateData;
+procedure TSolarData.UpdateData; // Zyklisches abfragen per http request
 var s      : string;
     json   : TJSONData;
     jo,jso : TJSONObject;
@@ -156,7 +172,14 @@ begin
              KOLLEKTOR_RL  := jso.Find('RL').AsInteger;
              KOLLEKTOR_MWL := jso.Find('MWL').AsFloat;
              jso := jo.Find('WARMWASSER') as TJSONObject;
+             WARMWASSER_TOben   := jso.Find('TOben').AsInteger;
              WARMWASSER_TUnten  := jso.Find('TUnten').AsInteger;
+
+             jso := jo.Find('VORLAUF') as TJSONObject;
+             VORLAUF_Haus := jso.Find('Haus').AsFloat;
+             VORLAUF_WKS_SOLL := jso.Find('Werkstatt_soll').AsFloat;
+             VORLAUF_WKS_IST := jso.Find('Werkstatt_ist').AsFloat;
+
              jso := jo.Find('PUFFER') as TJSONObject;
              PUFFER_Toben  := jso.Find('TOben').AsInteger;
              PUFFER_TUnten := jso.Find('TUnten').AsInteger;
@@ -166,6 +189,7 @@ begin
              jso := jo.Find('PUMPEN') as TJSONObject;
              PUMPE_SOLAR  := jso.Find('SOLARPUMPE').AsString='EIN';
              PUMPE_LADE   := jso.Find('LADEPUMPE').AsString='EIN';
+
              ZONENVENTIL  := jo.Find('ZONENVENTIL').AsString;
            end;
         except
@@ -197,8 +221,8 @@ procedure THeizung.FormCreate(Sender: TObject);
 begin
   if paramstr(1)='' then
    begin
-     Gserver:='http://hinterface.no-ip.org/cgi/json'
-//     Gserver:='http://10.0.0.123/cgi/json'
+//    Gserver:='http://hinterface.no-ip.org/cgi/json'
+     Gserver:='http://10.0.0.130/cgi/json'
    end
   else
     begin
@@ -210,9 +234,24 @@ begin
   Timer.Enabled:=true;
 end;
 
+procedure THeizung.bCloseClick(Sender: TObject);
+begin
+  Close;
+end;
+
 procedure THeizung.FormPaint(Sender: TObject);
 begin
   Canvas.Draw(0,0,Schema.Picture.Bitmap);
+end;
+
+procedure THeizung.lKOELClick(Sender: TObject);
+begin
+
+end;
+
+procedure THeizung.lPUToClick(Sender: TObject);
+begin
+
 end;
 
 
@@ -220,6 +259,8 @@ procedure THeizung.lWWTu1Click(Sender: TObject);
 begin
 
 end;
+
+
 
 procedure THeizung.TimerTimer(Sender: TObject);
 begin
@@ -229,6 +270,8 @@ begin
   try
     if GCurrent.UPDTime>0 then
      begin
+       //Canvas.Draw(random(200),random(200),STORUNG.Picture.Bitmap);
+
        lUpdateTS.Caption:=GCurrent.DateString+' | '+GCurrent.TimeString+' ['+inttostr(GCurrent.UPDTime)+']';
        lKOLLVL.Caption  := inttostr(GCurrent.KOLLEKTOR_VL)+' °C';
        lKOLLRL.Caption  := inttostr(GCurrent.KOLLEKTOR_RL)+' °C';
@@ -238,6 +281,9 @@ begin
        lPUTo.Caption    := inttostr(GCurrent.PUFFER_Toben)+' °C';
        lPUTu.Caption    := inttostr(GCurrent.PUFFER_TUnten)+' °C';
        lWWTu.Caption    := inttostr(GCurrent.WARMWASSER_TUnten)+' °C';
+       lWWTo.Caption    := inttostr(GCurrent.WARMWASSER_TOben)+' °C';
+       lVL_HAUS.Caption := FloatToStr(GCurrent.VORLAUF_Haus)+' °C';
+       lVL_W_IST.Caption := FloatToStr(GCurrent.VORLAUF_WKS_IST)+' °C';
      // lPLADE.Caption   := BoolToStr(GCurrent.PUMPE_LADE,'EIN','AUS');
      //  lPSOL.Caption    := BoolToStr(GCurrent.PUMPE_SOLAR,'EIN','AUS');
        lZVentil.Caption := GCurrent.ZONENVENTIL;
@@ -258,6 +304,46 @@ begin
         else
         begin
              Canvas.Draw(391,249,Pumpe_S_AUS.Picture.Bitmap);
+        end;
+
+        //GCurrent.PUMPE_WW := true;
+        //GCurrent.PUMPE_HK1 := true;
+        //GCurrent.PUMPE_HK2:= true;
+
+        if GCurrent.PUMPE_WW = TRUE then
+        begin
+             Canvas.Draw(586,169,Pumpe_S_EIN.Picture.Bitmap);
+        end
+        else
+        begin
+             Canvas.Draw(586,169,Pumpe_S_AUS.Picture.Bitmap);
+        end;
+
+        if GCurrent.PUMPE_HK1 = TRUE then
+        begin
+             Canvas.Draw(622,169,Pumpe_S_EIN.Picture.Bitmap);
+        end
+        else
+        begin
+             Canvas.Draw(622,169,Pumpe_S_AUS.Picture.Bitmap);
+        end;
+
+        if GCurrent.PUMPE_HK2 = TRUE then
+        begin
+             Canvas.Draw(658,169,Pumpe_S_EIN.Picture.Bitmap);
+        end
+        else
+        begin
+             Canvas.Draw(658,169,Pumpe_S_AUS.Picture.Bitmap);
+        end;
+
+        if GCurrent.BRENNER = True then
+        begin
+           Canvas.Draw(706,302,OEL_EIN.Picture.Bitmap);
+        end
+        else
+        begin
+           Canvas.Draw(706,302,OEL_AUS.Picture.Bitmap);
         end;
 
         if GCurrent.ZONENVENTIL = 'BOILER' then

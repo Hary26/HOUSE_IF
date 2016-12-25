@@ -1,18 +1,20 @@
 object Heizung: THeizung
-  Left = 242
-  Height = 454
-  Top = 114
+  Left = 551
+  Height = 451
+  Top = 225
   Width = 777
-  BorderIcons = []
-  BorderStyle = bsNone
+  BorderIcons = [biMinimize]
+  BorderStyle = bsSingle
   Caption = 'Form'
-  ClientHeight = 454
+  ClientHeight = 451
   ClientWidth = 777
+  FormStyle = fsSystemStayOnTop
   OnCreate = FormCreate
   OnPaint = FormPaint
+  Position = poScreenCenter
   LCLVersion = '1.0.14.0'
   object Schema: TImage
-    Left = 1
+    Left = 0
     Height = 424
     Top = 0
     Width = 784
@@ -674,6 +676,7 @@ object Heizung: THeizung
     AutoSize = False
     Caption = 'PUTo'
     ParentColor = False
+    OnClick = lPUToClick
   end
   object lKOEL: TLabel
     Left = 688
@@ -684,6 +687,7 @@ object Heizung: THeizung
     AutoSize = False
     Caption = 'Oel'
     ParentColor = False
+    OnClick = lKOELClick
   end
   object lKHolz: TLabel
     Left = 40
@@ -949,6 +953,70 @@ object Heizung: THeizung
       649CB22C336791FE1DA7BAE3B4B4D33D8F4E2C53DE3847EB3B3E4CC8625961D9
       0D0000000049454E44AE426082
     }
+    Visible = False
+  end
+  object lWWTo: TLabel
+    Left = 456
+    Height = 15
+    Top = 184
+    Width = 72
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'WWto'
+    ParentColor = False
+  end
+  object lVL_HAUS: TLabel
+    Left = 568
+    Height = 15
+    Top = 96
+    Width = 72
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'VLH:UNKN'
+    ParentColor = False
+  end
+  object lVL_W_IST: TLabel
+    Left = 680
+    Height = 15
+    Top = 96
+    Width = 72
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'VLWI:UNKN'
+    ParentColor = False
+  end
+  object bClose: TButton
+    Left = 702
+    Height = 25
+    Top = 426
+    Width = 75
+    Caption = 'Close'
+    OnClick = bCloseClick
+    TabOrder = 0
+  end
+  object STORUNG: TImage
+    Left = 272
+    Height = 43
+    Top = 16
+    Width = 52
+    Picture.Data = {
+      1754506F727461626C654E6574776F726B47726170686963B201000089504E47
+      0D0A1A0A0000000D49484452000000140000000F08020000006BFA7802000000
+      017352474200AECE1CE90000000467414D410000B18F0BFC6105000000097048
+      597300000EC300000EC301C76FA8640000001A74455874536F66747761726500
+      5061696E742E4E45542076332E352E313030F472A10000012149444154384F63
+      F88F0A6A6B6BED7180CCCC4CA8221840D72CC3CBEBC1C0508F81221818845958
+      A08A60005DF38A152B549899FF3330A0213756D68A8A0AA8221840D70C04CA22
+      22EB51759E6760106563834A23012C9A312DC76A2D10302C59B2841F430ED972
+      4C6BCF9F3F6F6464D4D7D7C7D0DFDFAFC0C404341BA8026E04D072396E6E0701
+      0120D2E4E32B2929818803B5050404181818848787D7D7D783349B0083116C03
+      DC888C8C8CA8C8C8FD60005464616171F2E44988B6F5EBD7034D010AA268863B
+      528F99D9DBDB1B6215044C9932454E4E0EA20D02B06B06A2083EBEE5CB974355
+      81C1F3E7CF252424A01C30A08166329D8D1660400009B0F6F6767C0186195540
+      307DFA740730000A7EFFFE1D22881E555813097E004D247D7D0094B81D881B44
+      2E6B0000000049454E44AE426082
+    }
+    Stretch = True
     Visible = False
   end
   object Timer: TTimer
