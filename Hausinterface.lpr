@@ -3,6 +3,7 @@ program Hausinterface;
 {$mode objfpc}{$H+}
 
 uses
+  cmem,
   {$IFDEF UNIX}
   cthreads,
   {$ENDIF}

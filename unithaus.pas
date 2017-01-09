@@ -36,6 +36,7 @@ type
     PUMPE_HK1         : boolean;
     PUMPE_HK2         : boolean;
     BRENNER           : boolean;
+    STOERUNG          : boolean;
     ZONENVENTIL       : String;
     UPDTime           : Integer;
     constructor Create;
@@ -66,9 +67,10 @@ type
     lVL_HAUS: TLabel;
     lVL_W_IST: TLabel;
     OEL_AUS: TImage;
-    STORUNG: TImage;
+    STOERUNG: TImage;
     Pumpe_S_AUS: TImage;
     Pumpe_W_AUS: TImage;
+    OK: TImage;
     ZV_Rechts: TImage;
     ZV_Links: TImage;
     Pumpe_S_EIN: TImage;
@@ -119,7 +121,6 @@ begin
   while not terminated do
    begin
      GCurrent.UpdateData;
-     sleep(500);
    end;
 end;
 
@@ -145,6 +146,7 @@ var s      : string;
     st     : TDateTime;
 
 begin
+  sleep(10000);
   With TFPHttpClient.Create(Nil) do
     try
       st := Now;
@@ -189,7 +191,11 @@ begin
              jso := jo.Find('PUMPEN') as TJSONObject;
              PUMPE_SOLAR  := jso.Find('SOLARPUMPE').AsString='EIN';
              PUMPE_LADE   := jso.Find('LADEPUMPE').AsString='EIN';
-
+             PUMPE_WW     := jso.Find('WWPUMPE').AsString='EIN';
+             PUMPE_HK1    := jso.Find('HK1PUMPE').AsString='EIN';
+             PUMPE_HK2    := jso.Find('HK2PUMPE').AsString='EIN';
+             BRENNER      := jo.Find('OELBRENNER').AsString='EIN';
+             STOERUNG     := jo.Find('BRENNERSTOERUNG').AsString='JA';
              ZONENVENTIL  := jo.Find('ZONENVENTIL').AsString;
            end;
         except
@@ -270,7 +276,7 @@ begin
   try
     if GCurrent.UPDTime>0 then
      begin
-       //Canvas.Draw(random(200),random(200),STORUNG.Picture.Bitmap);
+       //Canvas.Draw(random(200),random(200),STOERUNG.Picture.Bitmap);
 
        lUpdateTS.Caption:=GCurrent.DateString+' | '+GCurrent.TimeString+' ['+inttostr(GCurrent.UPDTime)+']';
        lKOLLVL.Caption  := inttostr(GCurrent.KOLLEKTOR_VL)+' °C';
@@ -309,6 +315,7 @@ begin
         //GCurrent.PUMPE_WW := true;
         //GCurrent.PUMPE_HK1 := true;
         //GCurrent.PUMPE_HK2:= true;
+        //GCurrent.STOERUNG:= true;
 
         if GCurrent.PUMPE_WW = TRUE then
         begin
@@ -337,7 +344,7 @@ begin
              Canvas.Draw(658,169,Pumpe_S_AUS.Picture.Bitmap);
         end;
 
-        if GCurrent.BRENNER = True then
+        if GCurrent.BRENNER = TRUE then
         begin
            Canvas.Draw(706,302,OEL_EIN.Picture.Bitmap);
         end
@@ -346,13 +353,22 @@ begin
            Canvas.Draw(706,302,OEL_AUS.Picture.Bitmap);
         end;
 
-        if GCurrent.ZONENVENTIL = 'BOILER' then
+        if GCurrent.STOERUNG = True then     // Anzeige Brennerstörung
         begin
-            Canvas.Draw(391,320,ZV_Links.Picture.Bitmap);
+           Canvas.Draw(712,330,STOERUNG.Picture.Bitmap);
         end
         else
         begin
-           Canvas.Draw(391,320,ZV_Rechts.Picture.Bitmap);
+           Canvas.Draw(712,330,OK.Picture.Bitmap);
+        end;
+
+         if GCurrent.ZONENVENTIL = 'BOILER' then
+        begin
+            Canvas.Draw(391,320,ZV_Rechts.Picture.Bitmap);
+        end
+        else
+        begin
+           Canvas.Draw(391,320,ZV_Links.Picture.Bitmap);
         end;
      end
     else
